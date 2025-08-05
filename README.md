@@ -21,7 +21,7 @@ newID=${ID}-${inf}
 
 En la carpeta "RABV_prot_db" se encuentran las bases de datos curadas de los 5 genes de la rabia. Deberá agregar la ruta donde se encuentren estos archivos y sus archivos generados por makeblast (señalado abajo) a su ~/.bashrc del siguiente modo:
 
-~ export Bx_RABVp_DB_PATH="/home/marcopterix/db/blast_db/RABV" 
+~ export Bx_RABVp_DB_PATH="/home/path/to/db/blast_db/RABV" 
 
 Una vez hecho esto, deberá compilar la base de datos de BLAST con:
 
