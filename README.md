@@ -27,7 +27,13 @@ Una vez hecho esto, deberá compilar la base de datos de BLAST con:
 
 ~ makeblastdb -in Nucleoprot_RABV.fasta -dbtype prot -out ./Nprot_RABV_db
 
+# Ejecutar el pipline
 
+Una vez que tenga todos los requisitos y haya configurado las rutas de entrada y salida en los scripts .sh, ejecute: 
+
+<ins>bash samtools_faidx.sh</ins>
+
+lo cual correrá la herramienta BLASTx y samtools faidx
 
 
 # Dependencias necesarias:
