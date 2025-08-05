@@ -6,5 +6,7 @@ Tenga en cuenta que sus secuencias deben estar nombradas algo así; de lo contra
 
 Si lo desea puede hacer los cambios pertinentes en las lineas de cada ciclo "for", para señalar cuál es el ID de las secuencias: 
 ID=$(basename ${assembly} | cut -d '-' -f '3' | cut -d '.' -f '1')
-inf=$(basename ${assembly} | cut -d '-' -f '2')
+
+inf=$(basename ${assembly} | cut -d '-' -f '2') 
+
 newID=${ID}-${inf}
