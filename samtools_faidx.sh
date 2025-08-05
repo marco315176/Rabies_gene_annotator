@@ -5,6 +5,8 @@ echo -e ========== Filtrar las regiones de los genes en nucleótidos de secuenci
 echo -e "\t" ===== Inicio: $(date) ===== "\n"
 echo -e "#############################################################################################" "\n"
 
+bash BLASTx_annotate_RABV.sh
+
 #------------------------------------------------------------------------------------
 #Definir ubicación de los directorios de los archivos .fa y del directorio de salida
 dirfa="/home/bioinfocenasa/Analisis_Corridas/SPAdes/virus" #Directorio donde están los archivos .fa
