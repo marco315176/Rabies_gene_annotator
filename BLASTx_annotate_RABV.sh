@@ -9,7 +9,13 @@ echo -e "################################################################" "\n"
 #Diseñado para extraer secuencias de proteinas de una base de datos de proteinas comparado con uno de nucleótidos
 #----------------------------------------------------------------------------------------------------------------
 
-cd /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus
+#------------------------------------------------------------------------------------
+#Definir ubicación de los directorios de los archivos .fa y del directorio de salida
+dirfa="/home/bioinfocenasa/Analisis_Corridas/SPAdes/virus" #Directorio donde están los archivos .fa
+dirout="/home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate" #Directorio de salida de archivos
+#------------------------------------------------------------------------------------
+
+cd ${dirfa}
 
 #--------------------------------------
 #Definir DB de proteinas de los 5 genes
@@ -37,16 +43,16 @@ echo -e "##### ${newID} #####"
 blastx -query ${assembly} \
        -db $Bx_RABVp_DB_PATH/${dbN} \
        -max_target_seqs 1 -max_hsps 1 -culling_limit 1 -evalue 1e-10 \
-       -out /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${newID}_N_blastx.tsv \
+       -out ${dirout}/${newID}_N_blastx.tsv \
        -outfmt '6 qseqid sseqid pident length mismatch gapopen qstart qend evalue bitscore qseq'
 
 #Extraer proteina en formato FASTA
-awk '{print ">"$1"_N""\n"$11}' /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${newID}_N_blastx.tsv \
-> /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${newID}_N_prot.fasta
+awk '{print ">"$1"_N""\n"$11}' ${dirout}/${newID}_N_blastx.tsv \
+> ${dirout}/${newID}_N_prot.fasta
 
 #Extraer información del alineamiento
-awk '{print $1"\t"$2"\t"$3"\t"$4"\t"$7"\t"($8+3)"\t"$9"\t"$10"\t""N"}' /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${newID}_N_blastx.tsv \
-> /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${newID}_N_info.tsv
+awk '{print $1"\t"$2"\t"$3"\t"$4"\t"$7"\t"($8+3)"\t"$9"\t"$10"\t""N"}' ${dirout}/${newID}_N_blastx.tsv \
+> ${dirout}/${newID}_N_info.tsv
 
 done
 
@@ -66,16 +72,16 @@ echo -e "##### ${newID} #####"
 blastx -query ${assembly} \
        -db $Bx_RABVp_DB_PATH/${dbP} \
        -max_target_seqs 1 -max_hsps 1 -culling_limit 1 -evalue 1e-10 \
-       -out /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${newID}_P_blastx.tsv \
+       -out ${dirout}/${newID}_P_blastx.tsv \
        -outfmt '6 qseqid sseqid pident length mismatch gapopen qstart qend evalue bitscore qseq'
 
 #Extraer proteina en formato FASTA
-awk '{print ">"$1"_P""\n"$11}' /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${newID}_P_blastx.tsv \
-> /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${newID}_P_prot.fasta
+awk '{print ">"$1"_P""\n"$11}' ${dirout}/${newID}_P_blastx.tsv \
+> ${dirout}/${newID}_P_prot.fasta
 
 #Extraer información del alineamiento
-awk '{print $1"\t"$2"\t"$3"\t"$4"\t"$7"\t"($8+3)"\t"$9"\t"$10"\t""P"}' /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${newID}_P_blastx.tsv \
-> /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${newID}_P_info.tsv
+awk '{print $1"\t"$2"\t"$3"\t"$4"\t"$7"\t"($8+3)"\t"$9"\t"$10"\t""P"}' ${dirout}/${newID}_P_blastx.tsv \
+> ${dirout}/${newID}_P_info.tsv
 
 done
 
@@ -95,16 +101,16 @@ echo -e "##### ${newID} #####"
 blastx -query ${assembly} \
        -db $Bx_RABVp_DB_PATH/${dbM} \
        -max_target_seqs 1 -max_hsps 1 -culling_limit 1 -evalue 1e-10 \
-       -out /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${newID}_M_blastx.tsv \
+       -out ${dirout}/${newID}_M_blastx.tsv \
        -outfmt '6 qseqid sseqid pident length mismatch gapopen qstart qend evalue bitscore qseq'
 
 #Extraer proteina en formato FASTA
-awk '{print ">"$1"_M""\n"$11}' /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${newID}_M_blastx.tsv \
-> /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${newID}_M_prot.fasta
+awk '{print ">"$1"_M""\n"$11}' ${dirout}/${newID}_M_blastx.tsv \
+> ${dirout}/${newID}_M_prot.fasta
 
 #Extraer información del alineamiento
-awk '{print $1"\t"$2"\t"$3"\t"$4"\t"$7"\t"($8+3)"\t"$9"\t"$10"\t""M"}' /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${newID}_M_blastx.tsv \
-> /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${newID}_M_info.tsv
+awk '{print $1"\t"$2"\t"$3"\t"$4"\t"$7"\t"($8+3)"\t"$9"\t"$10"\t""M"}' ${dirout}/${newID}_M_blastx.tsv \
+> ${dirout}/${newID}_M_info.tsv
 
 done
 
@@ -124,16 +130,16 @@ echo -e "##### ${newID} #####"
 blastx -query ${assembly} \
        -db $Bx_RABVp_DB_PATH/${dbG} \
        -max_target_seqs 1 -max_hsps 1 -culling_limit 1 -evalue 1e-10 \
-       -out /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${newID}_G_blastx.tsv \
+       -out ${dirout}/${newID}_G_blastx.tsv \
        -outfmt '6 qseqid sseqid pident length mismatch gapopen qstart qend evalue bitscore qseq'
 
 #Extraer proteina en formato FASTA
-awk '{print ">"$1"_G""\n"$11}' /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${newID}_G_blastx.tsv \
-> /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${newID}_G_prot.fasta
+awk '{print ">"$1"_G""\n"$11}' ${dirout}/${newID}_G_blastx.tsv \
+> ${dirout}/${newID}_G_prot.fasta
 
 #Extraer información del alineamiento
-awk '{print $1"\t"$2"\t"$3"\t"$4"\t"$7"\t"($8+3)"\t"$9"\t"$10"\t""G"}' /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${newID}_G_blastx.tsv \
-> /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${newID}_G_info.tsv
+awk '{print $1"\t"$2"\t"$3"\t"$4"\t"$7"\t"($8+3)"\t"$9"\t"$10"\t""G"}' ${dirout}/${newID}_G_blastx.tsv \
+> ${dirout}/${newID}_G_info.tsv
 
 done
 
@@ -153,16 +159,16 @@ echo -e "##### ${newID} #####"
 blastx -query ${assembly} \
        -db $Bx_RABVp_DB_PATH/${dbL} \
        -max_target_seqs 1 -max_hsps 1 -culling_limit 1 -evalue 1e-10 \
-       -out /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${newID}_L_blastx.tsv \
+       -out ${dirout}/${newID}_L_blastx.tsv \
        -outfmt '6 qseqid sseqid pident length mismatch gapopen qstart qend evalue bitscore qseq'
 
 #Extraer proteina en formato FASTA
-awk '{print ">"$1"_L""\n"$11}' /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${newID}_L_blastx.tsv \
-> /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${newID}_L_prot.fasta
+awk '{print ">"$1"_L""\n"$11}' ${dirout}/${newID}_L_blastx.tsv \
+> ${dirout}/${newID}_L_prot.fasta
 
 #Extraer información del alineamiento
-awk '{print $1"\t"$2"\t"$3"\t"$4"\t"$7"\t"($8+3)"\t"$9"\t"$10"\t""L"}' /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${newID}_L_blastx.tsv \
-> /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${newID}_L_info.tsv
+awk '{print $1"\t"$2"\t"$3"\t"$4"\t"$7"\t"($8+3)"\t"$9"\t"$10"\t""L"}' ${dirout}/${newID}_L_blastx.tsv \
+> ${dirout}/${newID}_L_info.tsv
 
 done
 
@@ -171,9 +177,9 @@ done
 # Concatenar archivos resultantes y eliminar los que no se usan
 #--------------------------------------------------------------
 
-rm /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/*_blastx.tsv
+rm ${dirout}/*_blastx.tsv
 
-cd /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate
+cd ${dirout}
 
 for n in *N_info.tsv; do
     IDn=$(basename ${n} | cut -d '_' -f '1')
@@ -198,15 +204,15 @@ continue
 	else
 
 #Concatenar los archivos de información del alineamiento en uno solo por ID
-cat ${n} ${p} ${m} ${g} ${l} > /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${IDn}_info_align.tsv
+cat ${n} ${p} ${m} ${g} ${l} > ${dirout}/${IDn}_info_align.tsv
 
-sed -i '1i ID\tReferencia\tIdentidad\tAling_long\tInicio\tFin\te-value\tbitscore\tGen' /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${IDn}_info_align.tsv
+sed -i '1i ID\tReferencia\tIdentidad\tAling_long\tInicio\tFin\te-value\tbitscore\tGen' ${dirout}/${IDn}_info_align.tsv
 
 	fi
 
 done
 
-rm /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/*_info.tsv
+rm ${dirout}/*_info.tsv
 
 #----------------------------------------
 # Concatenar archivos .fasta de proteinas
@@ -228,7 +234,7 @@ continue
         else
 
 #Concatenar los archivos de archivos fasta en uno solo por ID
-cat ${n} ${p} ${m} ${g} ${l} > /home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate/${IDn}_prot_RABV.fasta
+cat ${n} ${p} ${m} ${g} ${l} > ${dirout}/${IDn}_prot_RABV.fasta
 
 	fi
 done
