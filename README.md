@@ -31,11 +31,11 @@ export Bx_RABVp_DB_PATH="/home/path/to/db/blast_db/RABV"
 Una vez hecho esto, deberá compilar la base de datos de BLAST en un directorio para sus bases de datos con:
 
 ```
-makeblastdb -in Nucleoprot_RABV.fasta -dbtype prot -out ./Nprot_RABV_db #Para nucleoproteina (N)
-makeblastdb -in Phosphoprot_RABV.fasta -dbtype prot -out ./Pprot_RABV_db #Para fosfoproteína (P)
-makeblastdb -in Mtxprot_RABV.fasta -dbtype prot -out ./Mtxprot_RABV_db #Para proteina matriz (M)
-makeblastdb -in Glicoprot_RABV.fasta -dbtype prot -out ./Mtxprot_RABV_db #Para glucoproteína (G)
-makeblastdb -in Lprot_RABV.fasta -dbtype prot -out ./Lprot_RABV_db #Para la proteina polimerasa (L)
+makeblastdb -in Nucleoprot_RABV.fa -dbtype prot -out ./Nprot_RABV_db #Para nucleoproteina (N)
+makeblastdb -in Phosphoprot_RABV.fa -dbtype prot -out ./Pprot_RABV_db #Para fosfoproteína (P)
+makeblastdb -in Mtxprot_RABV.fa -dbtype prot -out ./Mtxprot_RABV_db #Para proteina matriz (M)
+makeblastdb -in Glicoprot_RABV.fa -dbtype prot -out ./Mtxprot_RABV_db #Para glucoproteína (G)
+makeblastdb -in Lprot_RABV.fa -dbtype prot -out ./Lprot_RABV_db #Para la proteina polimerasa (L)
 ```
 # Ejecutar el pipline
 
