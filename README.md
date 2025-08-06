@@ -39,12 +39,15 @@ makeblastdb -in Lprot_RABV.fasta -dbtype prot -out ./Lprot_RABV_db #Para la prot
 ```
 # Ejecutar el pipline
 
-Una vez que tenga todos los requisitos y haya configurado las rutas de entrada y salida en los scripts .sh, ejecute: 
+Una vez que tenga todos los requisitos y haya configurado las rutas de entrada y salida en los scripts .sh, ejecute el siguiente script, mismo que ejecutará tanto **BLASTx_annotate_RABV.sh** como la identificación con **samtools faidx**: 
 
 ```
 bash samtools_faidx.sh
 ```
-lo cual correrá la herramienta BLASTx y samtools faidx
+
+# Archivos de salida
+
+Al final de la ejecución del pipline, en la carpeta que usted marque como ${dirout}, encontrará dos carpetas: Nucleotidos y Proteinas, en las cuales encontrará las secuencias de nucleotidos y aminoácidos, respectivamente; así como también encontrará el archivo **Annotation_all.tsv** donde estará la información de la anotación de sus secuencias.
 
 
 # Dependencias necesarias:
