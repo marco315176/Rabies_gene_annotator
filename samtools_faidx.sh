@@ -36,9 +36,10 @@ for a in ${dirfa}/*fa; do
 
 case ${gen} in N)
 	if [[ ${gen} == ${prot} ]]; then
-echo -e "Comparando gen: ${gen} ${prot}"
+
 	if [[ ${IDi} == ${newID} ]]; then
 echo -e "Comparando ID: ${IDi} ${newID}"
+echo -e "Comparando gen: ${gen} ${prot}"
 
 samtools faidx ${a} ${contig}:${inic}-${fin} > ${dirout}/${contig}_${prot}_tmp.fa
 
@@ -56,9 +57,10 @@ fi
 
                P)
         if [[ ${gen} == ${prot} ]]; then
-echo -e "Comparando gen: ${gen} ${prot}"
+
         if [[ ${IDi} == ${newID} ]]; then
 echo -e "Comparando ID: ${IDi} ${newID}"
+echo -e "Comparando gen: ${gen} ${prot}"
 
 samtools faidx ${a} ${contig}:${inic}-${fin} > ${dirout}/${contig}_${prot}_tmp.fa
 
@@ -76,9 +78,10 @@ fi
 
                M)
         if [[ ${gen} == ${prot} ]]; then
-echo -e "Comparando gen: ${gen} ${prot}"
+
         if [[ ${IDi} == ${newID} ]]; then
 echo -e "Comparando ID: ${IDi} ${newID}"
+echo -e "Comparando gen: ${gen} ${prot}"
 
 samtools faidx ${a} ${contig}:${inic}-${fin} > ${dirout}/${contig}_${prot}_tmp.fa
 
@@ -96,9 +99,10 @@ fi
 
                G)
         if [[ ${gen} == ${prot} ]]; then
-echo -e "Comparando gen: ${gen} ${prot}"
+
         if [[ ${IDi} == ${newID} ]]; then
 echo -e "Comparando ID: ${IDi} ${newID}"
+echo -e "Comparando gen: ${gen} ${prot}"
 
 samtools faidx ${a} ${contig}:${inic}-${fin} > ${dirout}/${contig}_${prot}_tmp.fa
 
@@ -116,9 +120,10 @@ fi
 
                L)
         if [[ ${gen} == ${prot} ]]; then
-echo -e "Comparando gen: ${gen} ${prot}"
+
         if [[ ${IDi} == ${newID} ]]; then
 echo -e "Comparando ID: ${IDi} ${newID}"
+echo -e "Comparando gen: ${gen} ${prot}"
 
 samtools faidx ${a} ${contig}:${inic}-${fin} > ${dirout}/${contig}_${prot}_tmp.fa
 
@@ -131,7 +136,7 @@ sed 's/:.*$/_L/' ${dirout}/${contig}_${prot}_tmp.fa > ${dirout}/${contig}_${prot
   done
 done
 
-rm ${dirfa}/CENASA-MX20-Rab47.fa.fai
+rm ${dirfa}/*.fa.fai
 rm ${dirout}/*_tmp.fa
 rm ${dirout}/*_start_end_*.tsv
 
@@ -140,3 +145,11 @@ mkdir -p ${dirout}/Proteinas
 
 mv ${dirout}/*fa ${dirout}/Nucleotidos
 mv ${dirout}/*fasta ${dirout}/Proteinas
+
+for f in ${dirout}/*info_align.tsv; do
+    ename=$(basename ${f} | cut -d '_' -f '1')
+
+echo -e "\n########## ${ename} ########## \n$(cat ${f})"
+	done >> ${dirout}/Annotation_all.tsv
+
+rm ${dirout}/*_info_align.tsv
