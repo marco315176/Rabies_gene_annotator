@@ -42,7 +42,7 @@ makeblastdb -in ProtL_RABV.fa -dbtype prot -out ./Lprot_RABV_db #Para la protein
 Una vez que tenga todos los requisitos y haya configurado las rutas de entrada y salida en los scripts .sh, ejecute el siguiente script, mismo que ejecutará tanto **BLASTx_annotate_RABV.sh** como la identificación con **samtools faidx**: 
 
 ```
-bash samtools_faidx.sh
+bash rabies_gene_annotator.sh
 ```
 
 # Archivos de salida
