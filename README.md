@@ -73,4 +73,4 @@ Al final de la ejecución del pipline, en la carpeta que usted marque como ${dir
 
 # Dependencias necesarias:
 
-***Deberá tener instalado BLAST+ para poder ejecutar BLASTx (https://blast.ncbi.nlm.nih.gov/doc/blast-help/downloadblastdata.html#blast-executables) y samtools para poder ejecutar samtools faidx.***
+***Deberá tener instalado BLAST+ para poder ejecutar BLASTx (https://blast.ncbi.nlm.nih.gov/doc/blast-help/downloadblastdata.html#blast-executables) y samtools para poder ejecutar samtools faidx (https://www.htslib.org/).***
