@@ -37,6 +37,27 @@ makeblastdb -in Mtxprot_RABV.fa -dbtype prot -out ./Mtxprot_RABV_db #Para protei
 makeblastdb -in Glicoprot_RABV.fa -dbtype prot -out ./Gprot_RABV_db #Para glucoproteína (G)
 makeblastdb -in ProtL_RABV.fa -dbtype prot -out ./Lprot_RABV_db #Para la proteina polimerasa (L)
 ```
+
+Si prefieres descargar la base de datos para tener las secuencias actualizadas deberás tener instalado previamente BLAST+ para poder usar esearch:
+
+```
+esearch -db protein -query "Lyssavirus rabies [organism] AND nucleoprotein [Title]" | efetch -format fasta > Nucleoprot_RABV.faa
+esearch -db protein -query "Lyssavirus rabies [organism] AND phosphoprotein [Title]" | efetch -format fasta > Phosphoprot_RABV.faa
+esearch -db protein -query "Lyssavirus rabies [organism] AND matrix protein [Title]" | efetch -format fasta > Mtxprot_RABV.faa
+esearch -db protein -query "Lyssavirus rabies [organism] AND glycoprotein [Title]" | efetch -format fasta > Glicoprot_RABV.faa
+esearch -db protein -query "Lyssavirus rabies [organism] AND polymerase [Title]" | efetch -format fasta > ProtL_RABV.faa
+```
+
+Posteriormente, para curar tu DB y no tener quimeras o secuencias más largas, puedes utilizar seqkit:
+
+```
+seqkit seq -g -m 450 -M 450 Nucleoprot_RABV.faa > Nucleoprot_RABV.fa
+seqkit seq -g -m 297 -M 297 Phosphoprot_RABV.faa > Phosphoprot_RABV.fa
+seqkit seq -g -m 202 -M 202 Mtxprot_RABV.faa > Mtxprot_RABV.fa
+seqkit seq -g -m 524 -M 524 Glicoprot_RABV.faa > Glicoprot_RABV.fa
+seqkit seq -g -m 2127 -M 2127 ProtL_RABV.faa > ProtL_RABV.fa
+```
+
 # Ejecutar el pipline
 
 Una vez que tenga todos los requisitos y haya configurado las rutas de entrada y salida en los scripts .sh, ejecute el siguiente script, mismo que ejecutará tanto **BLASTx_annotate_RABV.sh** como la identificación con **samtools faidx**: 
