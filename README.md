@@ -1,5 +1,6 @@
 # Rabies_gene_annotator
-Pipline escrito en bash para la anotación y obtención de los 5 genes individuales del virus de la rabia en formato fasta
+Pipline escrito en bash para la anotación y obtención de los 5 genes individuales del virus de la rabia en formato fasta  
+
 
 # Importante:
 
@@ -21,42 +22,27 @@ newID=${ID}-${inf}
 ID=$(basename ${assembly} | cut -d '-' -f '1') #Si su archivo fasta se nombra algo como: Rab90-assembly.fa
 ```
 
+# Dependencias necesarias:
+
+***Deberá tener instalado:   
+-> BLAST+ para poder ejecutar BLASTx (https://blast.ncbi.nlm.nih.gov/doc/blast-help/downloadblastdata.html#blast-executables)  
+-> samtools para poder ejecutar samtools faidx (https://www.htslib.org/) y  
+-> seqkit (https://bioinf.shenwei.me/seqkit/download/)***
+
 # Preparar la base de datos
 
-En la carpeta "RABV_prot_db" se encuentran las bases de datos curadas de los 5 genes de la rabia. Deberá agregar la ruta donde se encuentren estos archivos y sus archivos generados por makeblast (señalado abajo) a su ~/.bashrc del siguiente modo:
+Para descargar las bases de datos deberás tener instalado previamente BLAST+ y seqkit. Una vez que los tenga instalados, se debe ejecutar el script RGA_db_dwl.sh del siguiente modo:
 
 ```
-export Bx_RABVp_DB_PATH="/home/path/to/db/blast_db/RABV"
-```
-Una vez hecho esto, deberá compilar la base de datos de BLAST en un directorio para sus bases de datos con:
-
-```
-makeblastdb -in Nucleoprot_RABV.fa -dbtype prot -out ./Nprot_RABV_db #Para nucleoproteina (N)
-makeblastdb -in Phosphoprot_RABV.fa -dbtype prot -out ./Pprot_RABV_db #Para fosfoproteína (P)
-makeblastdb -in Mtxprot_RABV.fa -dbtype prot -out ./Mtxprot_RABV_db #Para proteina matriz (M)
-makeblastdb -in Glicoprot_RABV.fa -dbtype prot -out ./Gprot_RABV_db #Para glucoproteína (G)
-makeblastdb -in ProtL_RABV.fa -dbtype prot -out ./Lprot_RABV_db #Para la proteina polimerasa (L)
+bash RGA_db_dwl.sh
 ```
 
-Si prefieres descargar la base de datos para tener las secuencias actualizadas deberás tener instalado previamente BLAST+ para poder usar esearch:
+Esto descargará las bases de datos en la carpeta $HOME/db/RGA. Posteriormente, deberá agregar la ruta donde se encuentren estos archivos generados a su ~/.bashrc del siguiente modo:
 
 ```
-esearch -db protein -query "Lyssavirus rabies [organism] AND nucleoprotein [Title]" | efetch -format fasta > Nucleoprot_RABV.faa
-esearch -db protein -query "Lyssavirus rabies [organism] AND phosphoprotein [Title]" | efetch -format fasta > Phosphoprot_RABV.faa
-esearch -db protein -query "Lyssavirus rabies [organism] AND matrix protein [Title]" | efetch -format fasta > Mtxprot_RABV.faa
-esearch -db protein -query "Lyssavirus rabies [organism] AND glycoprotein [Title]" | efetch -format fasta > Glicoprot_RABV.faa
-esearch -db protein -query "Lyssavirus rabies [organism] AND polymerase [Title]" | efetch -format fasta > ProtL_RABV.faa
+export Bx_RABV_RGA_PATH="$HOME/db/RGA"
 ```
 
-Posteriormente, para curar tu DB y no tener quimeras o secuencias más largas, puedes utilizar seqkit:
-
-```
-seqkit seq -g -m 450 -M 450 Nucleoprot_RABV.faa > Nucleoprot_RABV.fa
-seqkit seq -g -m 297 -M 297 Phosphoprot_RABV.faa > Phosphoprot_RABV.fa
-seqkit seq -g -m 202 -M 202 Mtxprot_RABV.faa > Mtxprot_RABV.fa
-seqkit seq -g -m 524 -M 524 Glicoprot_RABV.faa > Glicoprot_RABV.fa
-seqkit seq -g -m 2127 -M 2127 ProtL_RABV.faa > ProtL_RABV.fa
-```
 
 # Ejecutar el pipline
 
@@ -71,6 +57,4 @@ bash rabies_gene_annotator.sh
 Al final de la ejecución del pipline, en la carpeta que usted marque como ${dirout}, encontrará dos carpetas: Nucleotidos y Proteinas, en las cuales encontrará las secuencias de nucleotidos y aminoácidos, respectivamente; así como también encontrará el archivo **Annotation_all.tsv** donde estará la información de la anotación de sus secuencias.
 
 
-# Dependencias necesarias:
 
-***Deberá tener instalado BLAST+ para poder ejecutar BLASTx (https://blast.ncbi.nlm.nih.gov/doc/blast-help/downloadblastdata.html#blast-executables) y samtools para poder ejecutar samtools faidx (https://www.htslib.org/).***
