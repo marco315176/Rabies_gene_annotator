@@ -9,8 +9,8 @@ bash BLASTx_annotate_RABV.sh
 
 #------------------------------------------------------------------------------------
 #Definir ubicación de los directorios de los archivos .fa y del directorio de salida
-dirfa="/home/bioinfocenasa/Analisis_Corridas/SPAdes/virus" #Directorio donde están los archivos .fa
-dirout="/home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate" #Directorio de salida de archivos y los archivos *_start_end_*.tsv generados por BLAST
+dirfa="$HOME/Analisis_Corridas/SPAdes/virus" #Directorio donde están los archivos .fa
+dirout="$HOME/Analisis_Corridas/SPAdes/virus/BLASTx_annotate" #Directorio de salida de archivos y los archivos *_start_end_*.tsv generados por BLAST
 #------------------------------------------------------------------------------------
 
 cd ${dirout}
