@@ -4,12 +4,14 @@
 # Database download for RGA
 #---------------------------
 
-echo -e "\033[1;33m========== Starting database download ==========\033[0m""\n"
+echo -e "\033[42m================================================\033[m"
+echo -e "\033[42m========== Starting database download ==========\033[m"
+echo -e "\033[42m================================================\033[m""\n"
 
-echo -e "\033[1;32m========== Creating a database in $HOME/db/RGA/Prot ==========\033[0m\n"
+echo -e "\033[4;33m========== Creating database in $HOME/db/RGA ==========\033[0m\n"
 
-mkdir -p $HOME/db/RGA/Prot
-cd $HOME/db/RGA/Prot
+mkdir -p $HOME/db/RGA
+cd $HOME/db/RGA
 
 #--------
 # N prot
@@ -20,7 +22,7 @@ esearch -db protein -query "Lyssavirus rabies [organism] AND nucleoprotein [Titl
 
 seqkit seq -g -m 450 -M 450 Nucleoprot_RABV.faa > Nucleoprot_RABV.fa
 
-echo -e "\033[1;34m========== N gene database created ==========\033[0m\n"
+echo -e "\033[0;36m========== N gene database created ==========\033[0m\n"
 
 #--------
 # P prot
@@ -31,7 +33,7 @@ esearch -db protein -query "Lyssavirus rabies [organism] AND phosphoprotein [Tit
 
 seqkit seq -g -m 297 -M 297 Phosphoprot_RABV.faa > Phosphoprot_RABV.fa
 
-echo -e "\033[1;34m========== P gene database created ==========\033[0m\n"
+echo -e "\033[0;36m========== P gene database created ==========\033[0m\n"
 
 #----------
 # Mtx prot
@@ -42,7 +44,7 @@ esearch -db protein -query "Lyssavirus rabies [organism] AND matrix protein [Tit
 
 seqkit seq -g -m 202 -M 202 Mtxprot_RABV.faa > Mtxprot_RABV.fa
 
-echo -e "\033[1;34m========== M gene database created ==========\033[0m\n"
+echo -e "\033[0;36m========== M gene database created ==========\033[0m\n"
 
 #---------
 # G prot
@@ -53,7 +55,7 @@ esearch -db protein -query "Lyssavirus rabies [organism] AND glycoprotein [Title
 
 seqkit seq -g -m 524 -M 524 Glicoprot_RABV.faa > Glicoprot_RABV.fa
 
-echo -e "\033[1;34m========== G gene database created ==========\033[0m\n"
+echo -e "\033[0;36m========== G gene database created ==========\033[0m\n"
 
 #--------
 # L prot
@@ -64,7 +66,7 @@ esearch -db protein -query "Lyssavirus rabies [organism] AND polymerase [Title]"
 
 seqkit seq -g -m 2127 -M 2127 ProtL_RABV.faa > ProtL_RABV.fa
 
-echo -e "\033[1;34m========== L gene database created ==========\033[0m\n"
+echo -e "\033[0;36m========== L gene database created ==========\033[0m\n"
 
 chmod +x ./*.fa
 rm ./*.faa
@@ -79,3 +81,5 @@ makeblastdb -in Phosphoprot_RABV.fa -dbtype prot -out ./Pprot_RABV_db #For phosp
 makeblastdb -in Mtxprot_RABV.fa -dbtype prot -out ./Mtxprot_RABV_db #For matrix protein (M)
 makeblastdb -in Glicoprot_RABV.fa -dbtype prot -out ./Gprot_RABV_db #For glycoprotein (G)
 makeblastdb -in ProtL_RABV.fa -dbtype prot -out ./Lprot_RABV_db #For polymerase protein (L)
+
+ echo -e "\033[46m========== databases created ==========\033[m"
