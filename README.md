@@ -4,9 +4,7 @@ Pipline escrito en bash para la anotación y obtención de los 5 genes individua
 
 # Importante:
 
-Tenga en cuenta que sus secuencias deben estar nombradas algo así; de lo contrario el script fallará al intentar reconocer y formular los ID's: **RABV-2025-Rab90.fa**
-
-Por ahora, los contigs de su genoma completo de rabia deben llamarse igual que su archivo fasta; de modo que, siguiendo el ejemplo anterior, su contig debe estár identificado como: **>RABV-2025-Rab90**
+Tenga en cuenta que sus archivos fasta deben estar nombrados algo así; de lo contrario el script fallará al intentar reconocer los ID's: **RABV-2025-Rab90.fa**
 
 Si lo desea, puede hacer los cambios pertinentes en las lineas de cada ciclo "for" en los dos scripts aquí proporcionados, para señalar cuál es el ID de las secuencias: 
 
