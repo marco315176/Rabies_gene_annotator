@@ -11,8 +11,8 @@ echo -e "################################################################" "\n"
 
 #------------------------------------------------------------------------------------
 #Definir ubicación de los directorios de los archivos .fa y del directorio de salida
-dirfa="/home/bioinfocenasa/Analisis_Corridas/SPAdes/virus" #Directorio donde están los archivos .fa
-dirout="/home/bioinfocenasa/Analisis_Corridas/SPAdes/virus/BLASTx_annotate" #Directorio de salida de archivos
+dirfa="$HOME/Analisis_Corridas/SPAdes/virus" #Directorio donde están los archivos .fa
+dirout="$HOME/Analisis_Corridas/SPAdes/virus/BLASTx_annotate" #Directorio de salida de archivos
 #------------------------------------------------------------------------------------
 
 cd ${dirfa}
