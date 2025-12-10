@@ -1,155 +1,94 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-echo -e "#############################################################################################" "\n"
-echo -e ========== Filtrar las regiones de los genes en nucleótidos de secuencias de rabia ========== "\n"
-echo -e "\t" ===== Inicio: $(date) ===== "\n"
-echo -e "#############################################################################################" "\n"
+echo -e "\n""\n""\033[43m========== RABV gene annotator ==========\033[m"
+echo -e "\033[43m====== $(date) =====\033[m""\n"
 
-bash BLASTx_annotate_RABV.sh
+#---------
+# Options
+#---------
 
-#------------------------------------------------------------------------------------
-#Definir ubicación de los directorios de los archivos .fa y del directorio de salida
-dirfa="$HOME/Analisis_Corridas/SPAdes/virus" #Directorio donde están los archivos .fa
-dirout="$HOME/Analisis_Corridas/SPAdes/virus/BLASTx_annotate" #Directorio de salida de archivos y los archivos *_start_end_*.tsv generados por BLAST
-#------------------------------------------------------------------------------------
+usage () {
+echo ""
+echo -e "\033[4;33m========== Bash script designed to annotate and extract amino acid and nucleotide sequences of the five RABV genes. =========="
+echo ""
+echo -e "\033[4;33This script executes first and second steps of this Rabies Gene Annotator pipeline.\033[0m"
+echo ""
+echo "Options:"
+echo "Usage: $0 -f FASTA file PATH -o OUTDIR PATH"
+echo " -h print help "
+echo " -f FASTA file directory "
+echo " -o OUTPUT directory "
+echo " -p PATH to BLAST database. If you downloades the database by running the RGA_db_dwl.sh script, the path to your database is: $HOME/db/RGA "
+echo "";
+	}
 
-cd ${dirout}
-
-for gen in N P M G L; do
-echo -e "===== Buscando ${gen} ====="
-
-for i in *_start_end_*.tsv; do
-    IDi=$(basename ${i} | cut -d '_' -f '1')
-    prot=$(basename ${i} | cut -d '_' -f '4' | cut -d '.' -f '1')
-    inic=$(awk '{print $1}' ${i})
-    fin=$(awk '{print $2}' ${i})
-
-for a in ${dirfa}/*fa; do
-    contig=$(basename ${a} | cut -d '.' -f '1')
-    IDa=$(basename ${a} | cut -d '-' -f '3' | cut -d '.' -f '1')
-    inf=$(basename ${a} | cut -d '-' -f '2')
-    newID=${IDa}-${inf}
-
-#--------------------------
-# Identificación del gen N
-#--------------------------
-
-case ${gen} in N)
-	if [[ ${gen} == ${prot} ]]; then
-
-	if [[ ${IDi} == ${newID} ]]; then
-echo -e "Comparando ID: ${IDi} ${newID}"
-echo -e "Comparando gen: ${gen} ${prot}"
-
-samtools faidx ${a} ${contig}:${inic}-${fin} > ${dirout}/${contig}_${prot}_tmp.fa
-
-sed 's/:.*$/_N/' ${dirout}/${contig}_${prot}_tmp.fa > ${dirout}/${contig}_${prot}.fa
-
-else
-	continue
-   fi
+if [[ $# -eq 0 ]]; then
+    usage
+    exit 1
 fi
+
+while getopts ":hf:o:p:" opt; do
+      case ${opt} in
+h)
+  usage; exit
 ;;
+f)
+  dirfa=${OPTARG}
+;;
+o)
+  dirout=${OPTARG}
+;;
+p)
+  dirdb=${OPTARG}
+;;
+:)
+  echo -e "\033[0;33mOption -${OPTARG} requires an argument.\033[0m"
+exit
+;;
+\?)
+  echo -e "\033[0;31mInvalid option -${OPTARG}.\033[0m"
+exit 1
+;;
+	esac
+     done
 
-#--------------------------
-# Identificación del gen P
-#--------------------------
 
-               P)
-        if [[ ${gen} == ${prot} ]]; then
-
-        if [[ ${IDi} == ${newID} ]]; then
-echo -e "Comparando ID: ${IDi} ${newID}"
-echo -e "Comparando gen: ${gen} ${prot}"
-
-samtools faidx ${a} ${contig}:${inic}-${fin} > ${dirout}/${contig}_${prot}_tmp.fa
-
-sed 's/:.*$/_P/' ${dirout}/${contig}_${prot}_tmp.fa > ${dirout}/${contig}_${prot}.fa
-
-else
-        continue
-   fi
+if [[ ${dirfa} == ${dirout} ]]; then
+    echo -e "\033[0;31mError: -f and -o cannot be the same PATH.\033[0m"
+   exit 1
 fi
-;;
 
-#--------------------------
-# Identificación del gen M
-#--------------------------
-
-               M)
-        if [[ ${gen} == ${prot} ]]; then
-
-        if [[ ${IDi} == ${newID} ]]; then
-echo -e "Comparando ID: ${IDi} ${newID}"
-echo -e "Comparando gen: ${gen} ${prot}"
-
-samtools faidx ${a} ${contig}:${inic}-${fin} > ${dirout}/${contig}_${prot}_tmp.fa
-
-sed 's/:.*$/_M/' ${dirout}/${contig}_${prot}_tmp.fa > ${dirout}/${contig}_${prot}.fa
-
-else
-        continue
-   fi
+if [[ -z ${dirfa} ]]; then
+    echo -e "\033[0;33mError: Option -f is necesary.\033[0m"
+    exit 1
 fi
-;;
 
-#--------------------------
-# Identificación del gen G
-#--------------------------
-
-               G)
-        if [[ ${gen} == ${prot} ]]; then
-
-        if [[ ${IDi} == ${newID} ]]; then
-echo -e "Comparando ID: ${IDi} ${newID}"
-echo -e "Comparando gen: ${gen} ${prot}"
-
-samtools faidx ${a} ${contig}:${inic}-${fin} > ${dirout}/${contig}_${prot}_tmp.fa
-
-sed 's/:.*$/_G/' ${dirout}/${contig}_${prot}_tmp.fa > ${dirout}/${contig}_${prot}.fa
-
-else
-        continue
-   fi
+if [[ -z ${dirout} ]]; then
+    echo -e "\033[0;33mError: Option -o is necesary.\033[0m"
+    exit 1
 fi
-;;
 
-#--------------------------
-# Identificación del gen L
-#--------------------------
+if [[ -z ${dirdb} ]]; then
+    echo -e "\033[0;33mError: Option -p is necesary.\033[0m"
+    exit 1
+fi
 
-               L)
-        if [[ ${gen} == ${prot} ]]; then
+#------------------------------
+# Run BLASTx to annotate genes
+#------------------------------
 
-        if [[ ${IDi} == ${newID} ]]; then
-echo -e "Comparando ID: ${IDi} ${newID}"
-echo -e "Comparando gen: ${gen} ${prot}"
+RGA_BLASTx_annotate.sh -f ${dirfa} \
+                       -o ${dirout} \
+                       -p ${dirdb}
 
-samtools faidx ${a} ${contig}:${inic}-${fin} > ${dirout}/${contig}_${prot}_tmp.fa
+#
+# Run samtools to extract the nucleotide sequence of the genes
+#
 
-sed 's/:.*$/_L/' ${dirout}/${contig}_${prot}_tmp.fa > ${dirout}/${contig}_${prot}.fa
+RGA_samtools_faidx.sh -f ${dirfa} \
+                      -o ${dirout}
 
-	  fi
-	fi
-     esac
-   done
-  done
-done
-
-rm ${dirfa}/*.fa.fai
-rm ${dirout}/*_tmp.fa
-rm ${dirout}/*_start_end_*.tsv
-
-mkdir -p ${dirout}/Nucleotidos
-mkdir -p ${dirout}/Proteinas
-
-mv ${dirout}/*fa ${dirout}/Nucleotidos
-mv ${dirout}/*fasta ${dirout}/Proteinas
-
-for f in ${dirout}/*info_align.tsv; do
-    ename=$(basename ${f} | cut -d '_' -f '1')
-
-echo -e "\n########## ${ename} ########## \n$(cat ${f})"
-	done >> ${dirout}/Annotation_all.tsv
-
-rm ${dirout}/*_info_align.tsv
+echo -e "\033[3;32m###############################################################\033[0m"
+echo -e "\033[3;32m========== RABV genome annotation with RGA completed ==========\033[0m"
+echo -e "\033[3;32m================= $(date) ================\033[0m"
+echo -e "\033[3;32m###############################################################\033[0m"

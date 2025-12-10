@@ -4,14 +4,16 @@
 # Database download for RGA
 #---------------------------
 
+export NCBI_EMAIL="marco.hernandez.i@senasica.gob.mx"
+
 echo -e "\033[42m================================================\033[m"
 echo -e "\033[42m========== Starting database download ==========\033[m"
 echo -e "\033[42m================================================\033[m""\n"
 
-echo -e "\033[4;33m========== Creating database in $HOME/db/RGA ==========\033[0m\n"
+echo -e "\033[4;33m========== Creating database in $HOME/db/blast_db/old/RABV/Prot ==========\033[0m\n"
 
-mkdir -p $HOME/db/RGA
-cd $HOME/db/RGA
+mkdir -p $HOME/db/blast_db/old/RABV/Prot
+cd $HOME/db/blast_db/old/RABV/Prot
 
 #--------
 # N prot
