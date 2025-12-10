@@ -1,23 +1,13 @@
 # Rabies_gene_annotator
-Pipline escrito en bash para la anotación y obtención de los 5 genes individuales del virus de la rabia en formato fasta  
+Pipline escrito en bash para la anotación y obtención de los 5 genes individuales del virus de la rabia en nucleótidos y aminoácidos.
 
 
 # Importante:
 
-Tenga en cuenta que sus archivos fasta deben estar nombrados algo así; de lo contrario el script fallará al intentar reconocer los ID's: **RABV-2025-Rab90.fa**
 
-Si lo desea, puede hacer los cambios pertinentes en las lineas de cada ciclo "for" en los dos scripts aquí proporcionados, para señalar cuál es el ID de las secuencias: 
 
 ```
-#Cambiando:
-ID=$(basename ${assembly} | cut -d '-' -f '3' | cut -d '.' -f '1')
-
-inf=$(basename ${assembly} | cut -d '-' -f '2') 
-
-newID=${ID}-${inf}
-
-#Por algo como:
-ID=$(basename ${assembly} | cut -d '-' -f '1') #Si su archivo fasta se nombra algo como: Rab90-assembly.fa
+#working...
 ```
 
 # Dependencias necesarias:
@@ -35,7 +25,7 @@ Para descargar las bases de datos deberás tener instalado previamente BLAST+ y 
 bash RGA_db_dwl.sh
 ```
 
-Esto descargará las bases de datos en la carpeta $HOME/db/RGA. Posteriormente, deberá agregar la ruta donde se encuentren estos archivos generados a su ~/.bashrc del siguiente modo:
+Esto descargará las bases de datos en la carpeta $HOME/db/RGA. Si gusta puede agregar la ruta donde se encuentren estos archivos generados a su ~/.bashrc del siguiente modo:
 
 ```
 export Bx_RABV_RGA_PATH="$HOME/db/RGA"
@@ -44,7 +34,13 @@ export Bx_RABV_RGA_PATH="$HOME/db/RGA"
 
 # Ejecutar el pipline
 
-Una vez que tenga todos los requisitos y haya configurado las rutas de entrada y salida en los scripts .sh, ejecute el siguiente script, mismo que ejecutará tanto **BLASTx_annotate_RABV.sh** como la identificación con **samtools faidx**: 
+Una vez que tenga todos los requisitos, deberá cambiar los permisos de sus scripts para que puedan ejecutarse, de este modo:
+
+```
+chmod +x RGA_*
+chmod +x rabies_gene_annotator.sh
+```
+Y para ejecutar el pipeline: 
 
 ```
 bash rabies_gene_annotator.sh
