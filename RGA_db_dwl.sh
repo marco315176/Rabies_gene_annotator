@@ -4,8 +4,6 @@
 # Database download for RGA
 #---------------------------
 
-export NCBI_EMAIL="marco.hernandez.i@senasica.gob.mx"
-
 echo -e "\033[42m================================================\033[m"
 echo -e "\033[42m========== Starting database download ==========\033[m"
 echo -e "\033[42m================================================\033[m""\n"
