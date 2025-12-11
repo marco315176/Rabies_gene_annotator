@@ -57,12 +57,20 @@ source ~/.bashrc
 ```
 
 
-# Ejecutar el pipline
+# Uso y ejecución del pipline
 
 Una vez que tenga todos los requisitos, deberá ejecutar el pipeline de este modo:
 
 ```
-bash rabies_gene_annotator.sh
+bash rabies_gene_annotator.sh -f FASTA file directory -o OUTPUT directory -p PATH to BLAST DB 
+
+Options:
+Usage: /home/bioinfocenasa/bin/rabies_gene_annotator.sh -f FASTA file PATH -o OUTDIR PATH
+ -h print help 
+ -f FASTA file directory 
+ -o OUTPUT directory 
+ -p PATH to BLAST database. If you downloades the database by running the RGA_db_dwl.sh script, the path to your database is: /home/bioinfocenasa/db/RGA 
+
 ```
 
 # Archivos de salida
