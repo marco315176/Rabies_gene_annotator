@@ -7,8 +7,28 @@ Pipline escrito en bash para la anotación y obtención de los 5 genes individua
 
 Este pipeline funciona bien con secuencias completas del virus de la rabia (RABV), por lo que es importante mencionar que si usted quisiera anotar secuencias fragmentadas, samtools podría llegar a fallar al intentar extraer las secuencias de sus genes. Esto se debe a que, al realizar la anotación de los genes con secuencias de proteinas como referencia, para incluir el codón de paro, se busca tres bases después de lo indicado por BLASTx; de modo que si el contig en el que se anotó el gen es más pequeño, no obtendrá la secuencia de este.
 
+
+# Instalación:
+
+Para clonar el repositorio deberá ejecutar:
+
 ```
-#working...
+ git clone https://github.com/marco315176/Rabies_gene_annotator
+```
+
+Una vez que haya clonado el repositorio, deberá drigirse al directorio ***bin/*** y otorgarle permiso de ejecución a los scripts:
+
+```
+chmod +x *sh
+```
+También es importante que agregue esta carpeta al PATH en su ***~/.bashrc***:
+```
+nano ~/.bashrc
+
+export PATH="/$HOME/PATH_TO/Rabies_gene_annotator/bin:$PATH"
+
+source ~/.bashrc
+
 ```
 
 # Dependencias necesarias:
@@ -20,7 +40,7 @@ Este pipeline funciona bien con secuencias completas del virus de la rabia (RABV
 
 # Preparar la base de datos
 
-Para descargar las bases de datos deberás tener instalado previamente BLAST+ y seqkit. Una vez que los tenga instalados, se debe ejecutar el script RGA_db_dwl.sh del siguiente modo:
+Una vez que tenga instaladas las dependencias necesarias, debe ejecutar el script ***RGA_db_dwl.sh*** del siguiente modo:
 
 ```
 bash RGA_db_dwl.sh
@@ -29,19 +49,17 @@ bash RGA_db_dwl.sh
 Esto descargará las bases de datos en la carpeta $HOME/db/RGA. Si gusta puede agregar la ruta donde se encuentren estos archivos generados a su ~/.bashrc del siguiente modo:
 
 ```
+nano ~/.bashrc
+
 export Bx_RABV_RGA_PATH="$HOME/db/RGA"
+
+source ~/.bashrc
 ```
 
 
 # Ejecutar el pipline
 
-Una vez que tenga todos los requisitos, deberá cambiar los permisos de sus scripts para que puedan ejecutarse, de este modo:
-
-```
-chmod +x RGA_*
-chmod +x rabies_gene_annotator.sh
-```
-Y para ejecutar el pipeline: 
+Una vez que tenga todos los requisitos, deberá ejecutar el pipeline de este modo:
 
 ```
 bash rabies_gene_annotator.sh
@@ -49,7 +67,7 @@ bash rabies_gene_annotator.sh
 
 # Archivos de salida
 
-Al final de la ejecución del pipline, en la carpeta que usted marque como ${dirout}, encontrará dos carpetas: Nucleotidos y Proteinas, en las cuales encontrará las secuencias de nucleotidos y aminoácidos, respectivamente; así como también encontrará el archivo **Annotation_all.tsv** donde estará la información de la anotación de sus secuencias.
+Al final de la ejecución del pipline, en el directorio que usted indicó en la opción ***-o***, encontrará dos carpetas: Nucleotidos y Proteinas, en las cuales encontrará las secuencias de nucleotidos y aminoácidos, respectivamente; así como también encontrará el archivo **Annotation_all.tsv** donde estará la información de la anotación de sus secuencias.
 
 
 
