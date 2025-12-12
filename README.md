@@ -33,7 +33,9 @@ source ~/.bashrc
 
 # Dependencias necesarias:
 
-Deberá tener instalado los siguientes programas y, de igual forma, deberá agregar los binarios de estos a su PATH:   
+Deberá tener instalado los siguientes programas y, de igual forma, deberá agregar los binarios de estos a su PATH:
+
+
 ***-> BLAST+ para poder ejecutar BLASTx (https://blast.ncbi.nlm.nih.gov/doc/blast-help/downloadblastdata.html#blast-executables)  
 -> samtools para poder ejecutar samtools faidx (https://www.htslib.org/) y  
 -> seqkit (https://bioinf.shenwei.me/seqkit/download/)***
