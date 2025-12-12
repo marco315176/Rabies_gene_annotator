@@ -13,7 +13,7 @@ Este pipeline funciona bien con secuencias completas del virus de la rabia (RABV
 Para clonar el repositorio deberá ejecutar:
 
 ```
- git clone https://github.com/marco315176/Rabies_gene_annotator
+ git clone https://github.com/Marcopterix/Rabies_gene_annotator
 ```
 
 Una vez que haya clonado el repositorio, deberá drigirse al directorio ***bin/*** y otorgarle permiso de ejecución a los scripts:
@@ -37,7 +37,7 @@ source ~/.bashrc
 
 # Dependencias necesarias:
 
-Deberá tener instalado los siguientes programas y, de igual forma, deberá agregar los binarios de estos a su PATH:
+Deberá tener instalado los siguientes programas y, de igual forma, ***deberá agregar los binarios de estos programas a su PATH***:
 
 
 ***-> BLAST+ para poder ejecutar BLASTx (https://blast.ncbi.nlm.nih.gov/doc/blast-help/downloadblastdata.html#blast-executables)  
