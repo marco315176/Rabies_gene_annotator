@@ -71,11 +71,11 @@ Una vez que tenga todos los requisitos, deberá ejecutar el pipeline de este mod
 bash rabies_gene_annotator.sh -f FASTA file directory -o OUTPUT directory -p PATH to BLAST DB 
 
 Options:
-Usage: /home/bioinfocenasa/bin/rabies_gene_annotator.sh -f FASTA file PATH -o OUTDIR PATH
+Usage: rabies_gene_annotator.sh -f FASTA file PATH -o OUTDIR PATH
  -h print help 
  -f FASTA file directory 
  -o OUTPUT directory 
- -p PATH to BLAST database. If you downloades the database by running the RGA_db_dwl.sh script, the path to your database is: /home/bioinfocenasa/db/RGA 
+ -p PATH to BLAST database. If you downloades the database by running the RGA_db_dwl.sh script, the path to your database is: $HOME/db/RGA 
 
 ```
 
