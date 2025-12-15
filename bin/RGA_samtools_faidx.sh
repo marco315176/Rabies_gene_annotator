@@ -11,6 +11,8 @@ usage () {
 echo ""
 echo -e "\033[4;33m===== Bash script designed to annotate and extract amino acid and nucleotide sequences of the five RABV genes. =====\033[0m"
 echo -e ""
+echo "Pipeline developed in the massive sequencing and bioinformatics area of CENASA, SENASICA"
+echo ""
 echo -e "\033[4;33mThis is the second step: Obtaining nucleotide sequences with samtools faidx, based on the annotation with BLASTx.\033[0m"
 echo ""
 echo "Options:"
