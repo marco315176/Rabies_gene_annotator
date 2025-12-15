@@ -11,6 +11,8 @@ usage () {
 echo ""
 echo -e "\033[4;33m========== Bash script designed to annotate and extract amino acid and nucleotide sequences of the five RABV genes. =========="
 echo ""
+echo "Pipeline developed in the massive sequencing and bioinformatics area of CENASA, SENASICA"
+echo ""
 echo -e "\033[4;33This script executes first and second steps of this Rabies Gene Annotator pipeline.\033[0m"
 echo ""
 echo "Options:"
