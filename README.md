@@ -8,6 +8,9 @@ Pipline escrito en bash para la anotación y obtención de los 5 genes individua
 Este pipeline funciona bien con secuencias completas del virus de la rabia (RABV), por lo que es importante mencionar que si usted quisiera anotar secuencias fragmentadas, samtools podría llegar a fallar al intentar extraer las secuencias de sus genes. Esto se debe a que, al realizar la anotación de los genes con secuencias de proteinas como referencia, para incluir el codón de paro, se busca tres bases después de lo indicado por BLASTx; de modo que si el contig en el que se anotó el gen es más pequeño, no obtendrá la secuencia de este.
 
 
+También es importante que los nombres de sus archivos no contengan "_" (guiones bajos), ya que este script podría fallar en la identificación.
+
+
 # Instalación:
 
 Para clonar el repositorio deberá ejecutar:
