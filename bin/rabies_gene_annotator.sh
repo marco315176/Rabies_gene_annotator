@@ -9,11 +9,11 @@ echo -e "\033[43m====== $(date) =====\033[m""\n"
 
 usage () {
 echo ""
-echo -e "\033[4;33m========== Bash script designed to annotate and extract amino acid and nucleotide sequences of the five RABV genes. =========="
+echo -e "\033[4;33m========== Bash script designed to annotate and extract amino acid and nucleotide sequences of the five RABV genes. ==========\033[0m"
 echo ""
 echo "Pipeline developed in the massive sequencing and bioinformatics area of CENASA, SENASICA"
 echo ""
-echo -e "\033[4;33This script executes first and second steps of this Rabies Gene Annotator pipeline.\033[0m"
+echo -e "\033[4;33mThis script executes first and second steps of this Rabies Gene Annotator pipeline.\033[0m"
 echo ""
 echo "Options:"
 echo "Usage: $0 -f FASTA file PATH -o OUTDIR PATH"
